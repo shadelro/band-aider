@@ -7,3 +7,4 @@ p Songs:
 ul
   - @band.songs.each do |song|
     li= link_to song.name, band_song_path(@band, song)
+p= link_to 'Add Song', new_band_song_path(@band)

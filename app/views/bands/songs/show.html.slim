@@ -1,2 +1,5 @@
 p= link_to @band.name, @band
 p= @song.name
+p= simple_format(@song.lyrics)
+p= link_to 'Edit', edit_band_song_path(@band, @song)
+p= button_to 'Delete', band_song_path(@band, @song), method: :delete
