@@ -13,6 +13,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 gem 'devise'
 gem 'devise-i18n'
+gem 'omniauth-google-oauth2'
 gem 'foundation-rails'
 gem 'pg'
 gem 'pundit'
