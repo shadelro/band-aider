@@ -10,4 +10,10 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+
+  has_many :memberships, dependent: :destroy
+  has_many :bands, through: :memberships
+
+  has_many :invitations, dependent: :destroy
 end
