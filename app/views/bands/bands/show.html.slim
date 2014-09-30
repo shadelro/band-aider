@@ -7,3 +7,8 @@ p Songs:
 ul
   - @band.songs.each do |song|
     li= link_to song.name, band_song_path(@band, song)
+
+= form_for Membership.new do
+  = hidden_field_tag(:band_id, @band.id)
+  = select_tag("user_id", options_from_collection_for_select(@users_not_in_band, :id, :email))
+  = submit_tag('add')

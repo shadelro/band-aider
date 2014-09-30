@@ -16,6 +16,12 @@ chris = User.find_or_create_by(email: 'chris@yopmail.com', name: 'Chris Belsole'
   user.admin!
 end
 
+adam = User.find_or_create_by(email: 'adam@yopmail.com', name: 'Adam Adamson') do |user|
+  user.password = 'password'
+  user.password_confirmation = 'password'
+  user.admin!
+end
+
 alex_sons = Band.find_or_create_by(name: 'Alex Sons')
 dung_beetle = Band.find_or_create_by(name: 'Dung Beetle')
 
