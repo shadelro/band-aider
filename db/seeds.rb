@@ -25,9 +25,21 @@ end
 alex_sons = Band.find_or_create_by(name: 'Alex Sons')
 dung_beetle = Band.find_or_create_by(name: 'Dung Beetle')
 
-slave = Song.find_or_create_by(band: alex_sons, name: 'I Am Not a Slave')
-light = Song.find_or_create_by(band: alex_sons, name: 'Light at the End of the Tunnel')
-ready = Song.find_or_create_by(band: alex_sons, name: 'Ready to Go')
+slave = Song.find_or_create_by(
+  band: alex_sons,
+  name: 'I Am Not a Slave',
+  lyrics: "I am not a slave anymore\nSin has lost its hold on me\nI will seek the name of the Lord\nSo that everyone will see\nI am not a slave"
+)
+light = Song.find_or_create_by(
+  band: alex_sons,
+  name: 'Light at the End of the Tunnel',
+  lyrics: "Light at the end of tunnel\nStars in the sky so deep\nSavior when I'm in trouble\nYou're the reason I believe"
+)
+ready = Song.find_or_create_by(
+  band: alex_sons,
+  name: 'Ready to Go',
+  lyrics: "I'm ready to go"
+)
 
 Membership.find_or_create_by(user: brent, band: alex_sons)
 Membership.find_or_create_by(user: divi, band: alex_sons)

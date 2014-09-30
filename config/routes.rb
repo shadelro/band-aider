@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :bands, module: :bands, only: [:index, :show] do
-    resources :songs, only: [:index, :show]
+    resources :songs, only: [:index, :show, :new, :create, :edit, :update, :destroy]
   end
 
   resources :users, module: :users, only: :show do

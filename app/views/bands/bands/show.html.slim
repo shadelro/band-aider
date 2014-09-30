@@ -12,3 +12,5 @@ ul
   = hidden_field_tag(:band_id, @band.id)
   = select_tag("user_id", options_from_collection_for_select(@users_not_in_band, :id, :email))
   = submit_tag('add')
+
+p= link_to 'Add Song', new_band_song_path(@band)
