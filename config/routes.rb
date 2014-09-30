@@ -3,6 +3,15 @@ Rails.application.routes.draw do
   root to: 'visitors#index'
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
 
-  resources :bands, only: [:index, :show]
-  resources :users, only: :show
+  resources :bands, module: :bands, only: [:index, :show] do
+    resources :songs, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+  end
+
+  resources :users, module: :users, only: :show do
+    resources :invitations, only: :index
+    resources :bands, only: :index
+  end
+
+  resources :invitations, only: [:show, :destroy]
+  resources :memberships, only: :create
 end

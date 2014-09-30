@@ -16,6 +16,8 @@ class User < ActiveRecord::Base
 
   has_many :invitations, dependent: :destroy
 
+  validates :email, uniqueness: true
+
   def self.find_for_google_oauth2(auth)
     User.where(email: auth.info.email).first_or_create do |user|
       user.provider = auth.provider
