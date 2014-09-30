@@ -4,5 +4,7 @@ class Band < ActiveRecord::Base
 
   has_many :invitations, dependent: :destroy
 
+  has_many :songs
+
   validates :name, uniqueness: true
 end

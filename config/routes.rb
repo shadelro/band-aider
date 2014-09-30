@@ -3,7 +3,10 @@ Rails.application.routes.draw do
   root to: 'visitors#index'
   devise_for :users
 
-  resources :bands, only: [:index, :show]
+  resources :bands, module: :bands, only: [:index, :show] do
+
+  end
+
   resources :users, module: :users, only: :show do
     resources :invitations, only: :index
     resources :bands, only: :index
