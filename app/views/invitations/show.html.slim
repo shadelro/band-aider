@@ -1,0 +1,3 @@
+p= @invitation.band.name
+p= button_to 'Accept', memberships_path(band_id: @invitation.band.id)
+p= link_to 'Decline', invitation_path(@invitation), method: :destroy

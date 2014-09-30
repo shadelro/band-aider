@@ -17,7 +17,12 @@ chris = User.find_or_create_by(email: 'chris@yopmail.com', name: 'Chris Belsole'
 end
 
 idiot_energy = Band.find_or_create_by(name: 'Idiot Energy')
+dung_beetle = Band.find_or_create_by(name: 'Dung Beetle')
 
 Membership.find_or_create_by(user: brent, band: idiot_energy)
 Membership.find_or_create_by(user: divi, band: idiot_energy)
 Membership.find_or_create_by(user: chris, band: idiot_energy)
+
+Invitation.find_or_create_by(user: brent, band: dung_beetle)
+Invitation.find_or_create_by(user: divi, band: dung_beetle)
+Invitation.find_or_create_by(user: chris, band: dung_beetle)

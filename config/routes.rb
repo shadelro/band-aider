@@ -4,5 +4,10 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :bands, only: [:index, :show]
-  resources :users, only: :show
+  resources :users, only: :show do
+    resources :invitations, only: [:index, :show]
+    resources :bands, only: :index
+  end
+  resources :invitations, only: :destroy
+  resources :memberships, only: :create
 end
