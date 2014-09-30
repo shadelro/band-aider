@@ -1,11 +1,6 @@
 class BandsController < ApplicationController
   def index
-    if params[:user_id]
-      user = User.find(params[:user_id])
-      @bands = user.bands
-    else
-      @bands = Band.all
-    end
+    @bands = Band.all
   end
 
   def show

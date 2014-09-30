@@ -1,0 +1,3 @@
+ul
+  - @invitations.each do |invitation|
+    li= link_to invitation.band.name, invitation_path(invitation)
