@@ -1,6 +1,4 @@
 class MembershipsController < ApplicationController
-  before_filter :authenticate_user!
-
   def create
     membership = Membership.new(band_id: params[:band_id], user_id: current_user.id)
 

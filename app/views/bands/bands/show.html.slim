@@ -3,3 +3,7 @@ p Members:
 ul
   - @band.members.each do |member|
     li= link_to member.name, member
+p Songs:
+ul
+  - @band.songs.each do |song|
+    li= link_to song.name, band_song_path(@band, song)
