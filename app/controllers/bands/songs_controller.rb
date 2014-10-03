@@ -53,7 +53,7 @@ module Bands
     private
 
     def song_params
-      params.require(:song).permit(:name, :lyrics, :band_id)
+      params.require(:song).permit(:name, :lyrics, :band_id, :chart)
     end
   end
 end
