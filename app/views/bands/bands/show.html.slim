@@ -8,9 +8,9 @@ ul
   - @band.songs.each do |song|
     li= link_to song.name, band_song_path(@band, song)
 
-= form_for Membership.new do
-  = hidden_field_tag(:band_id, @band.id)
-  = select_tag("user_id", options_from_collection_for_select(@users_not_in_band, :id, :email))
-  = submit_tag('add')
+= simple_form_for @membership do |f|
+  = f.hidden_field :band_id, value: @band.id
+  = f.association :user, collection: @users_to_invite, value_method: :id, include_blank: false
+  = f.button :submit, 'Invite'
 
 p= link_to 'Add Song', new_band_song_path(@band)

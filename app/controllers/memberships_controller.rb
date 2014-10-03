@@ -1,11 +1,13 @@
 class MembershipsController < ApplicationController
   def create
-    membership = Membership.new(band_id: params[:band_id], user_id: params[:user_id] || current_user.id)
+    membership = Membership.create(membership_params)
 
-    if membership.save
-      redirect_to band_path(id: params[:band_id])
-    else
-      redirect_to user_invitation_path(current_user, invitation)
-    end
+    redirect_to band_path(membership.band)
+  end
+
+  private
+
+  def membership_params
+    params.require(:membership).permit(:band_id, :user_id)
   end
 end
