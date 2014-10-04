@@ -7,6 +7,10 @@ class MembershipPolicy
   end
 
   def create?
-    membership.band.members.include? @user
+    membership.user == @user || membership.band.members.include?(@user)
+  end
+
+  def destroy?
+    membership.user == @user
   end
 end

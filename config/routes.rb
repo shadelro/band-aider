@@ -14,5 +14,5 @@ Rails.application.routes.draw do
   end
 
   resources :invitations, only: [:show, :destroy]
-  resources :memberships, only: :create
+  resources :memberships, only: [:create, :destroy]
 end

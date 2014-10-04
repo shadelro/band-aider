@@ -12,6 +12,8 @@ ul
   = simple_form_for @membership do |f|
     = f.hidden_field :band_id, value: @band.id
     = f.association :user, collection: @users_to_invite, value_method: :id, include_blank: false
-    = f.button :submit, 'Add'
+    = f.button :submit, 'Add Member'
 
   p= link_to 'Add Song', new_band_song_path(@band)
+
+  p= button_to 'Leave Band', @my_membership, method: :delete
