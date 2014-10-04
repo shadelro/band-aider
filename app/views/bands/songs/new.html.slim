@@ -1,6 +1,6 @@
 = simple_form_for [@band, @song] do |f|
   = f.hidden_field :band_id, value: @band.id
   = f.input :name
-  = f.input :lyrics
+  = f.input :lyrics, input_html: {rows: 20}
   = f.input :chart
   = f.button :submit

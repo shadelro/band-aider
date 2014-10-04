@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
 
   resources :bands, module: :bands, only: [:index, :show] do
-    resources :songs, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+    resources :songs
     resources :users, only: :show
   end
 
@@ -15,4 +15,5 @@ Rails.application.routes.draw do
 
   resources :invitations, only: [:show, :destroy]
   resources :memberships, only: [:create, :destroy]
+  resources :tracks, only: [:create, :destroy]
 end

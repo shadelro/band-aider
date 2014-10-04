@@ -5,5 +5,18 @@ p= @song.name
 - if BandPolicy.new(current_user, @band).update?
   - if @song.chart.present?
     p= link_to 'Chart', @song.chart.url(:original, false)
+  - if @song.tracks.any?
+    ul
+      - @song.tracks.each do |track|
+        li= audio_tag(track.media.url(:original, false), controls: true)
+        p= track.media_file_name
+        = button_to 'Delete', track, method: :delete
+
   p= link_to 'Edit', edit_band_song_path(@band, @song)
+
+  = simple_form_for @track do |f|
+    = f.hidden_field :song_id, value: @song.id
+    = f.file_field :media
+    = f.button :submit, 'Upload Track'
+
   p= button_to 'Delete', band_song_path(@band, @song), method: :delete

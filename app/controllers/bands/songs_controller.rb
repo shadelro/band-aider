@@ -10,6 +10,7 @@ module Bands
     def show
       @band = Band.find(params[:band_id])
       @song = Song.find(params[:id])
+      @track = Track.new(song_id: params[:id])
     end
 
     def new
