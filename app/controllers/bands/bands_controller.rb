@@ -7,7 +7,7 @@ module Bands
     def show
       @band = Band.find(params[:id])
       @my_membership = Membership.find_by(band: @band, user: current_user)
-      @membership = Membership.new
+      @new_membership = Membership.new
       @users_to_invite = User.where.not(id: @band.members.map(&:id))
     end
   end

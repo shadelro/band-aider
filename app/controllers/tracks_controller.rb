@@ -3,7 +3,11 @@ class TracksController < ApplicationController
     track = Track.new(track_params)
     authorize track
 
-    track.save
+    if track.save
+      flash[:notice] = 'Track created'
+    else
+      flash[:error] = 'Could not create track'
+    end
 
     redirect_to band_song_path(track.song.band, track.song)
   end
@@ -13,7 +17,12 @@ class TracksController < ApplicationController
     authorize track
 
     song = track.song
-    track.destroy
+
+    if track.destroy
+      flash[:notice] = 'Track destroyed'
+    else
+      flash[:error] = 'Could not destroy track'
+    end
 
     redirect_to band_song_path(band_id: song.band.id, id: song.id)
   end

@@ -9,8 +9,10 @@ class InvitationsController < ApplicationController
     authorize invitation
 
     if invitation.destroy
+      flash[:notice] = 'Invitation turned down'
       redirect_to current_user
     else
+      flash[:error] = "An error occurred; you're still invited"
       redirect_to invitation
     end
   end

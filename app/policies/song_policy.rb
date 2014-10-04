@@ -6,6 +6,10 @@ class SongPolicy
     @song = song
   end
 
+  def show?
+    song.band.members.include? @user
+  end
+
   def new?
     song.band.members.include? @user
   end

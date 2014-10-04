@@ -14,9 +14,9 @@ p= @song.name
 
   p= link_to 'Edit', edit_band_song_path(@band, @song)
 
-  = simple_form_for @track do |f|
+  = simple_form_for @new_track do |f|
     = f.hidden_field :song_id, value: @song.id
-    = f.file_field :media
+    = f.input :media
     = f.button :submit, 'Upload Track'
 
   p= button_to 'Delete', band_song_path(@band, @song), method: :delete
