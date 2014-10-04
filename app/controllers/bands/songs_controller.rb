@@ -1,5 +1,7 @@
 module Bands
   class SongsController < ApplicationController
+    before_filter :authenticate_user!, except: [:index, :show]
+
     def index
       band = Band.find(params[:band_id])
       @songs = band.songs
@@ -13,10 +15,12 @@ module Bands
     def new
       @band = Band.find(params[:band_id])
       @song = Song.new(band_id: @band.id)
+      authorize @song
     end
 
     def create
       song = Song.new(song_params)
+      authorize song
 
       if song.save
         redirect_to band_song_path(song.band_id, song)
@@ -28,10 +32,12 @@ module Bands
     def edit
       @band = Band.find(params[:band_id])
       @song = Song.find_by(band_id: @band.id, id: params[:id])
+      authorize @song
     end
 
     def update
       song = Song.find_by(band_id: params[:band_id], id: params[:id])
+      authorize song
 
       if song.update(song_params)
         redirect_to band_song_path(song.band_id, song)
@@ -42,6 +48,7 @@ module Bands
 
     def destroy
       song = Song.find_by(band_id: params[:band_id], id: params[:id])
+      authorize song
 
       if song.destroy
         redirect_to band_path(params[:band_id])

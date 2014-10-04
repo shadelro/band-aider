@@ -1,8 +1,12 @@
 class MembershipsController < ApplicationController
-  def create
-    membership = Membership.create(membership_params)
+  before_filter :authenticate_user!
 
-    redirect_to band_path(membership.band)
+  def create
+    membership = Membership.new(membership_params)
+    authorize membership
+
+    membership.save
+    redirect_to band_path(membership_params[:band_id])
   end
 
   private

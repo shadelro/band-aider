@@ -2,15 +2,16 @@ p= @band.name
 p Members:
 ul
   - @band.members.each do |member|
-    li= link_to member.name, member
+    li= link_to member.name, band_user_path(@band, member)
 p Songs:
 ul
   - @band.songs.each do |song|
     li= link_to song.name, band_song_path(@band, song)
 
-= simple_form_for @membership do |f|
-  = f.hidden_field :band_id, value: @band.id
-  = f.association :user, collection: @users_to_invite, value_method: :id, include_blank: false
-  = f.button :submit, 'Invite'
+- if BandPolicy.new(current_user, @band).update?
+  = simple_form_for @membership do |f|
+    = f.hidden_field :band_id, value: @band.id
+    = f.association :user, collection: @users_to_invite, value_method: :id, include_blank: false
+    = f.button :submit, 'Add'
 
-p= link_to 'Add Song', new_band_song_path(@band)
+  p= link_to 'Add Song', new_band_song_path(@band)

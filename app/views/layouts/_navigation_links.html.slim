@@ -1,5 +1,3 @@
-li= link_to 'All Bands', bands_path
-
 - if user_signed_in?
   li= link_to 'My Bands', user_bands_path(current_user)
   li= link_to my_invitations_label, user_invitations_path(current_user)

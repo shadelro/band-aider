@@ -7,4 +7,8 @@ class Band < ActiveRecord::Base
   has_many :songs
 
   validates :name, uniqueness: true
+
+  def has_member?(user)
+    members.include? user
+  end
 end

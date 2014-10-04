@@ -1,6 +1,9 @@
 p= link_to @band.name, @band
 p= @song.name
 = simple_format(@song.lyrics)
-p= link_to 'Chart', @song.chart.url(:original, false)
-p= link_to 'Edit', edit_band_song_path(@band, @song)
-p= button_to 'Delete', band_song_path(@band, @song), method: :delete
+
+- if BandPolicy.new(current_user, @band).update?
+  - if @song.chart.present?
+    p= link_to 'Chart', @song.chart.url(:original, false)
+  p= link_to 'Edit', edit_band_song_path(@band, @song)
+  p= button_to 'Delete', band_song_path(@band, @song), method: :delete

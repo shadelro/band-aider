@@ -1,11 +1,17 @@
 class InvitationsController < ApplicationController
   def show
     @invitation = Invitation.find(params[:id])
+    authorize @invitation
   end
 
   def destroy
-    Invitation.find(params[:id]).destroy
+    invitation = Invitation.find(params[:id])
+    authorize invitation
 
-    redirect_to current_user
+    if invitation.destroy
+      redirect_to current_user
+    else
+      redirect_to invitation
+    end
   end
 end
