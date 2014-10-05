@@ -6,7 +6,7 @@ module Bands
       @song = Song.find_by(band_id: params[:band_id], id: params[:id])
       authorize @song
 
-      @band = song.band
+      @band = @song.band
       @new_track = Track.new(song_id: @song.id)
     end
 
