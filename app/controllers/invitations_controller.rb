@@ -2,6 +2,8 @@ class InvitationsController < ApplicationController
   def show
     @invitation = Invitation.find(params[:id])
     authorize @invitation
+
+    @new_membership = Membership.new(band_id: @invitation.band.id, user_id: @invitation.user.id)
   end
 
   def create

@@ -1,0 +1,4 @@
+h1= @band.name
+ul
+  - @songs.each do |song|
+    li= link_to song.name, band_song_path(@band, song)

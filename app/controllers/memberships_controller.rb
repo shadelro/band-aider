@@ -14,6 +14,24 @@ class MembershipsController < ApplicationController
     redirect_to band_path(membership_params[:band_id])
   end
 
+  def edit
+    @membership = Membership.find(params[:id])
+    authorize @membership
+  end
+
+  def update
+    membership = Membership.find(params[:id])
+    authorize membership
+
+    if membership.update(membership_params)
+      flash[:notice] = 'Details updated'
+      redirect_to band_user_path(band_id: membership.band_id, id: membership.user_id)
+    else
+      flash[:error] = 'Could not update details'
+      redirect_to edit_membership_path(membership)
+    end
+  end
+
   def destroy
     membership = Membership.find(params[:id])
     authorize membership
@@ -30,6 +48,6 @@ class MembershipsController < ApplicationController
   private
 
   def membership_params
-    params.require(:membership).permit(:band_id, :user_id)
+    params.require(:membership).permit(:band_id, :user_id, :instrument, :bio)
   end
 end

@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
   mount Upmin::Engine => '/admin'
   root to: 'bands/bands#index'
-  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
+  devise_for :users, controllers: {omniauth_callbacks: 'users/omniauth_callbacks'}
 
-  resources :bands, module: :bands, only: [:index, :show] do
-    resources :songs, only: [:show, :new, :create, :edit, :update, :destroy]
+  resources :bands, module: :bands do
+    resources :songs
     resources :users, only: :show
   end
 
@@ -14,6 +14,6 @@ Rails.application.routes.draw do
   end
 
   resources :invitations, only: [:show, :create, :destroy]
-  resources :memberships, only: [:create, :destroy]
+  resources :memberships, only: [:create, :edit, :update, :destroy]
   resources :tracks, only: [:create, :destroy]
 end

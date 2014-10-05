@@ -10,6 +10,14 @@ class MembershipPolicy
     membership.user == @user
   end
 
+  def edit?
+    membership.user == @user
+  end
+
+  def update?
+    edit?
+  end
+
   def destroy?
     create?
   end

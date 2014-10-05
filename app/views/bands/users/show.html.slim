@@ -1,5 +1,7 @@
 p= link_to @band.name, @band
-p
-  = link_to @user.name, @user
-  |  (#{@membership.instrument})
+h1= @user.name
+p= @membership.instrument
 = simple_format(@membership.bio)
+
+- if MembershipPolicy.new(current_user, @membership).edit?
+  p= link_to 'Edit Details', edit_membership_path(@membership)

@@ -10,6 +10,13 @@ module Bands
       @new_track = Track.new(song_id: @song.id)
     end
 
+    def index
+      @band = Band.find(params[:band_id])
+      authorize @band, :show_songs?
+
+      @songs = @band.songs
+    end
+
     def new
       @band = Band.find(params[:band_id])
       @song = Song.new(band_id: @band.id)

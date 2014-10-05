@@ -1,3 +1,5 @@
 ul
   - @bands.each do |band|
     li= link_to band.name, band
+
+p= link_to 'Create a band', new_band_path

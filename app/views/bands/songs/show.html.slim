@@ -1,5 +1,5 @@
 p= link_to @band.name, @band
-p= @song.name
+h1= @song.name
 = simple_format(@song.lyrics)
 
 - if BandPolicy.new(current_user, @band).update?
@@ -16,7 +16,7 @@ p= @song.name
   p= link_to 'Edit', edit_band_song_path(@band, @song)
 
   = simple_form_for @new_track do |f|
-    = f.hidden_field :song_id, value: @song.id
+    = f.hidden_field :song_id
     = f.input :media
     = f.button :submit, 'Upload Track'
 

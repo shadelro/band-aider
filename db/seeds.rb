@@ -25,8 +25,8 @@ adam = User.find_or_create_by(email: 'adam@yopmail.com', name: 'Adam Adamson') d
   user.admin!
 end
 
-alex_sons = Band.find_or_create_by(name: 'Alex Sons')
-dung_beetle = Band.find_or_create_by(name: 'Dung Beetle')
+alex_sons = Band.find_or_create_by(name: 'Alex Sons', description: 'Led by 17-year old Alex Sons, this band plays music.')
+dung_beetle = Band.find_or_create_by(name: 'Dung Beetle', description: "dung BEEEEtle. 'nuff said.")
 
 slave = Song.find_or_create_by(
   band: alex_sons,

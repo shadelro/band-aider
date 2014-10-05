@@ -1,6 +1,8 @@
-= simple_form_for Membership.new(band_id: @invitation.band.id, user_id: @invitation.user.id) do |f|
-  = f.hidden_field :band_id, value: @invitation.band.id
-  = f.hidden_field :user_id, value: @invitation.user.id
+h1= @invitation.band.name
+
+= simple_form_for @new_membership do |f|
+  = f.hidden_field :band_id
+  = f.hidden_field :user_id
   = f.button :submit, 'Accept'
 
 p= link_to 'Decline', invitation_path(@invitation), method: :destroy
