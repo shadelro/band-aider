@@ -5,6 +5,7 @@ p= @song.name
 - if BandPolicy.new(current_user, @band).update?
   - if @song.chart.present?
     p= link_to 'Chart', @song.chart.url(:original, false)
+
   - if @song.tracks.any?
     ul
       - @song.tracks.each do |track|

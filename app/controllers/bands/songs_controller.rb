@@ -25,7 +25,7 @@ module Bands
         redirect_to band_song_path(song.band_id, song)
       else
         flash[:error] = 'Could not create song'
-        redirect_to new_band_song_path(band)
+        redirect_to new_band_song_path(song.band_id, song)
       end
     end
 

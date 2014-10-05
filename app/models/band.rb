@@ -3,10 +3,9 @@ class Band < ActiveRecord::Base
   has_many :members, through: :memberships, source: :user
 
   has_many :invitations, dependent: :destroy
+  has_many :songs, dependent: :destroy
 
-  has_many :songs
-
-  validates :name, uniqueness: true
+  validates :name, uniqueness: true, presence: true
 
   def has_member?(user)
     members.include? user
