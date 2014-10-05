@@ -5,10 +5,10 @@ ul
     li= link_to member.name, band_user_path(@band, member)
 
 - if BandPolicy.new(current_user, @band).update?
-  = simple_form_for @new_membership do |f|
-    = f.hidden_field :band_id, value: @band.id
+  = simple_form_for @new_invitation do |f|
+    = f.hidden_field :band_id, value: @new_invitation.band_id
     = f.association :user, collection: @users_to_invite, value_method: :id, include_blank: false
-    = f.button :submit, 'Add Member'
+    = f.button :submit, 'Invite'
 
   p Songs:
   ul

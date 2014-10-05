@@ -10,7 +10,11 @@ class InvitationPolicy
     @user == invitation.user
   end
 
+  def create?
+    invitation.band.members.include?(@user)
+  end
+
   def destroy?
-    @user == invitation.user
+    @user == invitation.user || create?
   end
 end

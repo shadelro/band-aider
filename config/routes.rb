@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     resources :bands, only: :index
   end
 
-  resources :invitations, only: [:show, :destroy]
+  resources :invitations, only: [:show, :create, :destroy]
   resources :memberships, only: [:create, :destroy]
   resources :tracks, only: [:create, :destroy]
 end

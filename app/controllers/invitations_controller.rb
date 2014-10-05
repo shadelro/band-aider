@@ -4,6 +4,19 @@ class InvitationsController < ApplicationController
     authorize @invitation
   end
 
+  def create
+    invitation = Invitation.new(invitation_params)
+    authorize invitation
+
+    if invitation.save
+      flash[:notice] = 'User invited'
+    else
+      flash[:error] = 'Could not invite user'
+    end
+
+    redirect_to invitation.band
+  end
+
   def destroy
     invitation = Invitation.find(params[:id])
     authorize invitation
@@ -15,5 +28,11 @@ class InvitationsController < ApplicationController
       flash[:error] = "An error occurred; you're still invited"
       redirect_to invitation
     end
+  end
+
+  private
+
+  def invitation_params
+    params.require(:invitation).permit(:band_id, :user_id)
   end
 end
