@@ -1,2 +1,5 @@
 p= link_to @band.name, @band
-p= link_to @user.name, @user
+p
+  = link_to @user.name, @user
+  |  (#{@membership.instrument})
+= simple_format(@membership.bio)

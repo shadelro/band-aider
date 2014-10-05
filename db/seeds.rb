@@ -44,9 +44,9 @@ ready = Song.find_or_create_by(
   lyrics: "I'm ready to go"
 )
 
-Membership.find_or_create_by(user: brent, band: alex_sons)
-Membership.find_or_create_by(user: divi, band: alex_sons)
-Membership.find_or_create_by(user: chris, band: alex_sons)
+Membership.find_or_create_by(user: brent, band: alex_sons, instrument: 'lead guitar', bio: 'Brent is in this band and stuff.')
+Membership.find_or_create_by(user: divi, band: alex_sons, instrument: 'bass', bio: 'Divi learned to play bass so he could join.')
+Membership.find_or_create_by(user: chris, band: alex_sons, instrument: 'ukelele', bio: 'Chris lends a fresh perspective on ukelele blues.')
 
 Invitation.find_or_create_by(user: brent, band: dung_beetle)
 Invitation.find_or_create_by(user: divi, band: dung_beetle)

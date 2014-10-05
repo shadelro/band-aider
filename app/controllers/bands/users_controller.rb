@@ -1,8 +1,9 @@
 module Bands
   class UsersController < ApplicationController
     def show
-      @band = Band.find(params[:band_id])
-      @user = User.find(params[:id])
+      @membership = Membership.find_by(band_id: params[:band_id], user_id: params[:id])
+      @band = @membership.band
+      @user = @membership.user
     end
   end
 end
