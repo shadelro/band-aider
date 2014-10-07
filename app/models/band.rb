@@ -10,4 +10,8 @@ class Band < ActiveRecord::Base
   def has_member?(user)
     members.include? user
   end
+
+  def invitable_users
+    User.where.not(id: (memberships.map(&:user_id) + invitations.map(&:user_id)).flatten)
+  end
 end

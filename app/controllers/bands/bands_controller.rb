@@ -6,9 +6,7 @@ module Bands
       @band = Band.find(params[:id])
       @my_membership = Membership.find_by(band: @band, user: current_user)
       @new_invitation = Invitation.new(band_id: @band.id)
-      memberships = @band.memberships.map(&:user_id)
-      invitations = @band.invitations.map(&:user_id)
-      @users_to_invite = User.where.not(id: (memberships + invitations).flatten)
+      @users_to_invite = @band.invitable_users
     end
 
     def index
