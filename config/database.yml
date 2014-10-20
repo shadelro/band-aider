@@ -1,13 +1,13 @@
 development:
   adapter:  postgresql
   host:     localhost
-  database: band-aide_development
-  username: band-aide
+  database: band-aider_development
+  username: band-aider
   password:
 
 test:
   adapter:  postgresql
   host:     localhost
-  database: band-aide_test
-  username: band-aide
+  database: band-aider_test
+  username: band-aider
   password:
