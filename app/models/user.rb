@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, omniauth_providers: [:google_oauth2]
 
   has_many :memberships, dependent: :destroy
-  has_many :bands, through: :memberships
+  has_many :bands, through: :memberships, dependent: :destroy
 
   has_many :invitations, dependent: :destroy
 
