@@ -26,7 +26,6 @@ adam = User.find_or_create_by(email: 'adam@yopmail.com', name: 'Adam Adamson') d
 end
 
 alex_sons = Band.find_or_create_by(name: 'Alex Sons', description: 'Led by 17-year old Alex Sons, this band plays music.')
-dung_beetle = Band.find_or_create_by(name: 'Idiot Energy', description: "I dunno.")
 
 slave = Song.find_or_create_by(
   band: alex_sons,
@@ -48,6 +47,9 @@ Membership.find_or_create_by(user: brent, band: alex_sons, instrument: 'lead gui
 Membership.find_or_create_by(user: divi, band: alex_sons, instrument: 'bass', bio: 'Divi learned to play bass so he could join.')
 Membership.find_or_create_by(user: chris, band: alex_sons, instrument: 'ukelele', bio: 'Chris lends a fresh perspective on ukelele blues.')
 
-Invitation.find_or_create_by(user: brent, band: dung_beetle)
-Invitation.find_or_create_by(user: divi, band: dung_beetle)
-Invitation.find_or_create_by(user: chris, band: dung_beetle)
+idiot_energy = Band.find_or_create_by(name: 'Idiot Energy', description: "I dunno.")
+
+Membership.find_or_create_by(user: brent, band: idiot_energy, instrument: 'guitar and vocals', bio: 'Brent made a band')
+
+Invitation.find_or_create_by(user: divi, band: idiot_energy)
+Invitation.find_or_create_by(user: chris, band: idiot_energy)
