@@ -24,15 +24,28 @@ module Bands
     end
 
     def create
-      song = Song.new(song_params)
+      band = Band.find(params[:band_id])
+      @song = Song.new(song_params.merge(band_id: band.id))
       authorize song
 
-      if song.save
-        flash[:notice] = 'Song created'
-        redirect_to band_song_path(song.band_id, song)
+      if @song.save
+        respond_to do |format|
+          format.html {
+            flash[:notice] = 'Song created'
+            redirect_to band_song_path(@song.band_id, @song)
+          }
+          format.json { }
+        end
       else
-        flash[:error] = 'Could not create song'
-        redirect_to new_band_song_path(song.band_id, song)
+        respond_to do |format|
+          format.html {
+            flash[:error] = 'Could not create song'
+            redirect_to new_band_song_path(@song.band_id, @song)
+          }
+          format.json {
+            format.json { render json: {errors: @song.errors.full_messages}.to_json, status: 400 }
+          }
+        end
       end
     end
 
@@ -43,15 +56,25 @@ module Bands
     end
 
     def update
-      song = Song.find_by(band_id: params[:band_id], id: params[:id])
+      @song = Song.find_by(band_id: params[:band_id], id: params[:id])
       authorize song
 
-      if song.update(song_params)
-        flash[:notice] = 'Song updated'
-        redirect_to band_song_path(song.band_id, song)
+      if @song.update(song_params)
+        respond_to do |format|
+          format.html {
+            flash[:notice] = 'Song updated'
+            redirect_to band_song_path(@song.band_id, @song)
+          }
+          format.json { }
+        end
       else
-        flash[:error] = 'Could not update song'
-        redirect_to new_band_song_path(band)
+        respond_to do |format|
+          format.html {
+            flash[:error] = 'Could not update song'
+            redirect_to new_band_song_path(band)
+          }
+          format.json { render json: {errors: @song.errors.full_messages}.to_json, status: 400 }
+        end
       end
     end
 
@@ -60,18 +83,30 @@ module Bands
       authorize song
 
       if song.destroy
-        flash[:notice] = 'Song destroyed'
-        redirect_to band_path(params[:band_id])
+        respond_to do |format|
+          format.html {
+            flash[:notice] = 'Song destroyed'
+            redirect_to band_path(params[:band_id])
+          }
+          format.json { render nothing: true, status: 204 }
+        end
       else
-        flash[:error] = 'Could not destroy song'
-        redirect_to band_path(params[:band_id])
+        respond_to do |format|
+          format.html {
+            flash[:error] = 'Could not destroy song'
+            redirect_to band_path(params[:band_id])
+          }
+          format.json {
+            format.json { render json: {errors: song.errors.full_messages}.to_json, status: 400 }
+          }
+        end
       end
     end
 
     private
 
     def song_params
-      params.require(:song).permit(:name, :lyrics, :band_id, :chart)
+      params.require(:song).permit(:name, :lyrics, :chart)
     end
   end
 end

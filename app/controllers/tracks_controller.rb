@@ -1,4 +1,6 @@
 class TracksController < ApplicationController
+  before_filter :authenticate_user!
+
   def create
     track = Track.new(track_params)
     authorize track

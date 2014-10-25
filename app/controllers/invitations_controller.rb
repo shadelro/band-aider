@@ -1,4 +1,6 @@
 class InvitationsController < ApplicationController
+  before_filter :authenticate_user!
+
   def show
     @invitation = Invitation.find(params[:id])
     authorize @invitation
@@ -11,12 +13,23 @@ class InvitationsController < ApplicationController
     authorize invitation
 
     if invitation.save
-      flash[:notice] = 'User invited'
+      @invitation = Invitation.find(invitation.id)
+      respond_to do |format|
+        format.html {
+          flash[:notice] = 'User invited'
+          redirect_to @invitation.band
+        }
+        format.json { }
+      end
     else
-      flash[:error] = 'Could not invite user'
+      repond_to do |format|
+        format.html {
+          flash[:error] = 'Could not invite user'
+          redirect_to invitation.band
+        }
+        format.json { render json: {errors: invitation.errors.full_messages}.to_json, status: 400 }
+      end
     end
-
-    redirect_to invitation.band
   end
 
   def destroy
@@ -24,11 +37,21 @@ class InvitationsController < ApplicationController
     authorize invitation
 
     if invitation.destroy
-      flash[:notice] = 'Invitation turned down'
-      redirect_to current_user
+      respond_to do |format|
+        format.html {
+          flash[:notice] = 'Invitation turned down'
+          redirect_to current_user
+        }
+        format.json { render nothing: true, status: 204 }
+      end
     else
-      flash[:error] = "An error occurred; you're still invited"
-      redirect_to invitation
+      respond_to do |format|
+        format.html {
+          flash[:error] = "An error occurred; you're still invited"
+          redirect_to invitation
+        }
+        format.json { render json: {errors: invitation.errors.full_messages}.to_json, status: 400 }
+      end
     end
   end
 
