@@ -1,6 +1,6 @@
 module Bands
   class SongsController < ApplicationController
-    before_filter :authenticate_user!, except: [:index, :show]
+    before_filter :authenticate_user!, except: [:show, :index]
 
     def show
       @song = Song.find_by(band_id: params[:band_id], id: params[:id])
