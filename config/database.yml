@@ -1,3 +1,10 @@
+production:
+  adapter: postgresql
+  host: localhost
+  database: band-aider
+  username: <%= ENV['BAND_AIDER_POSTGRES_USERNAME'] %>
+  password: <%= ENV['BAND_AIDER_POSTGRES_PASSWORD'] %>
+
 development:
   adapter:  postgresql
   host:     localhost
