@@ -22,25 +22,12 @@ module Bands
       band = Band.new(band_params)
       authorize band
 
-      if band.save
-        Membership.create(band: @band, user: current_user)
-        @band = Band.find(band.id)
-
-        respond_to do |format|
-          format.html {
-            flash[:notice] = 'Band created'
-            redirect_to @band
-          }
-          format.json { }
-        end
+      if band.save && Membership.create(band: band, user: current_user)
+        flash[:notice] = 'Band created'
+        redirect_to band
       else
-        respond_to do |format|
-          format.html {
-            flash[:error] = 'Could not create band'
-            redirect_to new_band_path
-          }
-          format.json { render json: {errors: @band.errors.full_messages}.to_json, status: 400 }
-        end
+        flash[:error] = 'Could not create band'
+        redirect_to new_band_path
       end
     end
 
@@ -54,21 +41,11 @@ module Bands
       authorize @band
 
       if @band.update(band_params)
-        respond_to do |format|
-          format.html {
-            flash[:notice] = 'Band updated'
-            redirect_to @band
-          }
-          format.json { }
-        end
+        flash[:notice] = 'Band updated'
+        redirect_to @band
       else
-        respond_to do |format|
-          format.html {
-            flash[:error] = 'Could not update band'
-            redirect_to edit_band_path(@band)
-          }
-          format.json { render json: {errors: @band.errors.full_messages}.to_json, status: 400 }
-        end
+        flash[:error] = 'Could not update band'
+        redirect_to edit_band_path(@band)
       end
     end
 
@@ -77,21 +54,11 @@ module Bands
       authorize band
 
       if band.destroy
-        respond_to do |format|
-          format.html {
-            flash[:notice] = 'Band deleted'
-            redirect_to current_user
-          }
-          format.json { render nothing: true, status: 204 }
-        end
+        flash[:notice] = 'Band deleted'
+        redirect_to current_user
       else
-        respond_to do |format|
-          format.html {
-            flash[:error] = 'Could not delete band'
-            redirect_to band
-          }
-          format.json { render json: {errors: band.errors.full_messages}.to_json, status: 400 }
-        end
+        flash[:error] = 'Could not delete band'
+        redirect_to band
       end
     end
 

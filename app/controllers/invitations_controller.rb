@@ -13,23 +13,12 @@ class InvitationsController < ApplicationController
     authorize invitation
 
     if invitation.save
-      @invitation = Invitation.find(invitation.id)
-      respond_to do |format|
-        format.html {
-          flash[:notice] = 'User invited'
-          redirect_to @invitation.band
-        }
-        format.json { }
-      end
+      flash[:notice] = 'User invited'
     else
-      repond_to do |format|
-        format.html {
-          flash[:error] = 'Could not invite user'
-          redirect_to invitation.band
-        }
-        format.json { render json: {errors: invitation.errors.full_messages}.to_json, status: 400 }
-      end
+      flash[:error] = 'Could not invite user'
     end
+
+    redirect_to invitation.band
   end
 
   def destroy
@@ -37,21 +26,11 @@ class InvitationsController < ApplicationController
     authorize invitation
 
     if invitation.destroy
-      respond_to do |format|
-        format.html {
-          flash[:notice] = 'Invitation turned down'
-          redirect_to current_user
-        }
-        format.json { render nothing: true, status: 204 }
-      end
+      flash[:notice] = 'Invitation turned down'
+      redirect_to current_user
     else
-      respond_to do |format|
-        format.html {
-          flash[:error] = "An error occurred; you're still invited"
-          redirect_to invitation
-        }
-        format.json { render json: {errors: invitation.errors.full_messages}.to_json, status: 400 }
-      end
+      flash[:error] = "An error occurred; you're still invited"
+      redirect_to invitation
     end
   end
 

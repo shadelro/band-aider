@@ -29,23 +29,11 @@ module Bands
       authorize song
 
       if @song.save
-        respond_to do |format|
-          format.html {
-            flash[:notice] = 'Song created'
-            redirect_to band_song_path(@song.band_id, @song)
-          }
-          format.json { }
-        end
+        flash[:notice] = 'Song created'
+        redirect_to band_song_path(@song.band_id, @song)
       else
-        respond_to do |format|
-          format.html {
-            flash[:error] = 'Could not create song'
-            redirect_to new_band_song_path(@song.band_id, @song)
-          }
-          format.json {
-            format.json { render json: {errors: @song.errors.full_messages}.to_json, status: 400 }
-          }
-        end
+        flash[:error] = 'Could not create song'
+        redirect_to new_band_song_path(@song.band_id, @song)
       end
     end
 
@@ -60,21 +48,11 @@ module Bands
       authorize song
 
       if @song.update(song_params)
-        respond_to do |format|
-          format.html {
-            flash[:notice] = 'Song updated'
-            redirect_to band_song_path(@song.band_id, @song)
-          }
-          format.json { }
-        end
+        flash[:notice] = 'Song updated'
+        redirect_to band_song_path(@song.band_id, @song)
       else
-        respond_to do |format|
-          format.html {
-            flash[:error] = 'Could not update song'
-            redirect_to new_band_song_path(band)
-          }
-          format.json { render json: {errors: @song.errors.full_messages}.to_json, status: 400 }
-        end
+        flash[:error] = 'Could not update song'
+        redirect_to new_band_song_path(band)
       end
     end
 
@@ -83,24 +61,12 @@ module Bands
       authorize song
 
       if song.destroy
-        respond_to do |format|
-          format.html {
-            flash[:notice] = 'Song destroyed'
-            redirect_to band_path(params[:band_id])
-          }
-          format.json { render nothing: true, status: 204 }
-        end
+        flash[:notice] = 'Song destroyed'
       else
-        respond_to do |format|
-          format.html {
-            flash[:error] = 'Could not destroy song'
-            redirect_to band_path(params[:band_id])
-          }
-          format.json {
-            format.json { render json: {errors: song.errors.full_messages}.to_json, status: 400 }
-          }
-        end
+        flash[:error] = 'Could not destroy song'
       end
+
+      redirect_to band_path(params[:band_id])
     end
 
     private
