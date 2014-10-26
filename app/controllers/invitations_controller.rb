@@ -13,6 +13,7 @@ class InvitationsController < ApplicationController
     authorize invitation
 
     if invitation.save
+      UserMailer.band_invitation_email(invitation).deliver
       flash[:notice] = 'User invited'
     else
       flash[:error] = 'Could not invite user'
