@@ -14,7 +14,7 @@ module Api
     end
 
     def user_not_authorized
-      render json: {error: 'nice try'}.to_json, status: 401
+      render json: {error: 'you are not authorized to perform that action'}.to_json, status: 401
     end
 
     def resource_not_found
