@@ -5,4 +5,4 @@ h1= @invitation.band.name
   = f.hidden_field :user_id
   = f.button :submit, 'Accept'
 
-p= link_to 'Decline', invitation_path(@invitation), method: :destroy
+p= link_to 'Decline', invitation_path(@invitation), method: :delete
